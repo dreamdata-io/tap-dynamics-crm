@@ -97,7 +97,7 @@ def main():
 
     # pick lists items can not be queried via the OData service, so we need to sync them separately
     # we always want to sync this data for all customers
-    sync_pick_lists(auth)
+    sync_pick_lists(auth, parsed_args.config["domain"])
 
 
 if __name__ == "__main__":

@@ -28,8 +28,8 @@ def write_schema(stream):
     singer.write_schema(stream.tap_stream_id, schema, stream.key_properties)
 
 
-def sync_pick_lists(auth: requests.auth.AuthBase):
-    url = f"https://learnlight.crm4.dynamics.com/api/data/v9.0/stringmaps"
+def sync_pick_lists(auth: requests.auth.AuthBase, domain: str):
+    url = f"https://{domain}.dynamics.com/api/data/v9.0/stringmaps"
     for record in paginate(auth, url):
         singer.write_record("pick_lists", record)
 
