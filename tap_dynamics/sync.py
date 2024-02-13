@@ -102,9 +102,9 @@ def _sync_stream_incremental(service, entitycls, start):
             base_query.or_(
                 entitycls.activitytypecode == "phonecall",
                 entitycls.activitytypecode == "appointment",
-            )
+                entitycls.activitytypecode == "email"
         )
-
+    )
     base_query = base_query.order_by(getattr(entitycls, MODIFIED_DATE_FIELD).asc())
 
     now = datetime.utcnow().replace(tzinfo=pytz.UTC)
