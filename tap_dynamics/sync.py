@@ -102,6 +102,7 @@ def _sync_stream_incremental(service, entitycls, start):
             base_query.or_(
                 entitycls.activitytypecode == "phonecall",
                 entitycls.activitytypecode == "appointment",
+                entitycls.activitytypecode == "email"
             )
         )
 
