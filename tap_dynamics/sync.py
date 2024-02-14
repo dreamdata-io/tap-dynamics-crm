@@ -102,7 +102,7 @@ def _sync_stream_incremental(service, entitycls, start):
             base_query.or_(
                 entitycls.activitytypecode == "phonecall",
                 entitycls.activitytypecode == "appointment",
-                entitycls.activitytypecode == "email"
+                entitycls.activitytypecode == "email",
             )
         )
 
@@ -171,7 +171,14 @@ def sync(service, selected_streams, state, start_date):
         update_current_stream(state, stream.tap_stream_id)
         sync_stream(service, state, start_date, stream, mdata)
 
-        if stream.tap_stream_id in ["leads", "accounts", "contacts", "opportunities", "activitypointers"]:
+        if stream.tap_stream_id in [
+            "leads",
+            "accounts",
+            "contacts",
+            "opportunities",
+            "activitypointers",
+            "msevtmgt_events",
+        ]:
             stream_name = f"{stream.tap_stream_id}_properties"
             schema = stream.schema.to_dict()
             singer.write_record(stream_name, schema)

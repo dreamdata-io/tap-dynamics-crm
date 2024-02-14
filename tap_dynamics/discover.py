@@ -18,6 +18,7 @@ advanced_tables = [
     "activitypointers",
     "businessunits",
     "activityparties",
+    "msevtmgt_events",
 ]
 
 
@@ -88,9 +89,11 @@ def discover(service, advanced_features_enabled=False):
                     key_properties=pks,
                     schema=schema,
                     metadata=metadata,
-                    replication_method="INCREMENTAL"
-                    if schema_dict.get("properties", {}).get("createdon", None)
-                    else "FULL_TABLE",
+                    replication_method=(
+                        "INCREMENTAL"
+                        if schema_dict.get("properties", {}).get("createdon", None)
+                        else "FULL_TABLE"
+                    ),
                 )
             )
 
