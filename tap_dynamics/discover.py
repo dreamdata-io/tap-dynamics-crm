@@ -20,6 +20,7 @@ advanced_tables = [
     "activityparties",
     "msevtmgt_events",
     "msevtmgt_eventregistrations",
+
 ]
 
 
