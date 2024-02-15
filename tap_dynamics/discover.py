@@ -19,6 +19,8 @@ advanced_tables = [
     "businessunits",
     "activityparties",
     "msevtmgt_events",
+    "msevtmgt_eventregistrations",
+
 ]
 
 

@@ -178,6 +178,7 @@ def sync(service, selected_streams, state, start_date):
             "opportunities",
             "activitypointers",
             "msevtmgt_events",
+            "msevtmgt_eventregistrations",
         ]:
             stream_name = f"{stream.tap_stream_id}_properties"
             schema = stream.schema.to_dict()
