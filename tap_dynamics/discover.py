@@ -11,6 +11,8 @@ free_tables = [
 ]
 
 advanced_tables = [
+    "msevtmgt_events",
+    "msevtmgt_eventregistrations",
     "leads",
     "transactioncurrencies",
     "salesorders",
@@ -18,9 +20,6 @@ advanced_tables = [
     "activitypointers",
     "businessunits",
     "activityparties",
-    "msevtmgt_events",
-    "msevtmgt_eventregistrations",
-
 ]
 
 
