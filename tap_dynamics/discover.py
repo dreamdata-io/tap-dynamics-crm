@@ -21,6 +21,7 @@ advanced_tables = [
     "businessunits",
     "activityparties",
     "campaigns"
+    "mb_marketingautomationactivities"
 ]
 
 
