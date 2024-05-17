@@ -20,7 +20,7 @@ advanced_tables = [
     "activitypointers",
     "businessunits",
     "activityparties",
-    "campaigns"
+    "campaigns",
     "mb_marketingautomationactivities"
 ]
 
