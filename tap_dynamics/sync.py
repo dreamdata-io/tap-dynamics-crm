@@ -97,14 +97,14 @@ def sync_stream(service, state, start_date, stream, mdata):
 
 def _sync_stream_incremental(service, entitycls, start):
     base_query = service.query(entitycls)
+    conditions = [
+        "activitytypecode eq 'phonecall'",
+        "activitytypecode eq 'appointment'",
+        "activitytypecode eq 'email'"
+    ]
+    filter_string = "({})".format(" or ".join(conditions))
     if entitycls.__odata_schema__["name"] == "activitypointer":
-        base_query = base_query.filter(
-            base_query.or_(
-                entitycls.activitytypecode == "phonecall",
-                entitycls.activitytypecode == "appointment",
-                entitycls.activitytypecode == "email",
-            )
-        )
+        base_query = base_query.filter(filter_string)
 
     base_query = base_query.order_by(getattr(entitycls, MODIFIED_DATE_FIELD).asc())
 
