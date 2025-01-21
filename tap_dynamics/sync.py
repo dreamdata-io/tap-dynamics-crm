@@ -70,6 +70,18 @@ def sync_stream(service, state, start_date, stream, mdata):
         LOGGER.info("{} - Syncing using full replication".format(stream.tap_stream_id))
 
         query = service.query(entitycls)
+        if stream.tap_stream_id == "activityparties":
+            activityparties_conditions = [
+                    "participationtypemask eq 1",
+                    "participationtypemask eq 2",
+                    "participationtypemask eq 3",
+                    "participationtypemask eq 4",
+                    "participationtypemask eq 5",
+                    "participationtypemask eq 6",
+                    "participationtypemask eq 7",
+                ]
+            filter_activityparties = "({})".format(" or ".join(activityparties_conditions))
+            query = query.filter(filter_activityparties)
 
     schema = stream.schema.to_dict()
 
@@ -97,17 +109,19 @@ def sync_stream(service, state, start_date, stream, mdata):
 
 def _sync_stream_incremental(service, entitycls, start):
     base_query = service.query(entitycls)
-    conditions = [
-        "activitytypecode eq 'phonecall'",
-        "activitytypecode eq 'appointment'",
-        "activitytypecode eq 'email'"
-    ]
-    filter_string = "({})".format(" or ".join(conditions))
+
     if entitycls.__odata_schema__["name"] == "activitypointer":
-        base_query = base_query.filter(filter_string)
+        print("entered the activitypointer")
+        activitypointer_conditions = [
+            "activitytypecode eq 'phonecall'",
+            "activitytypecode eq 'appointment'",
+            "activitytypecode eq 'email'"
+        ]
+        filter_activitypointers = "({})".format(" or ".join(activitypointer_conditions))
+        base_query = base_query.filter(filter_activitypointers)
 
     base_query = base_query.order_by(getattr(entitycls, MODIFIED_DATE_FIELD).asc())
-
+    
     now = datetime.utcnow().replace(tzinfo=pytz.UTC)
     delta = timedelta(days=30)
 
